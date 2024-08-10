@@ -35,6 +35,7 @@ This function encrypts a given string using key and return encrypted string
 - Purpose: Encrypt a plain text string using encryption before storing it.
 ### Usage: 
 ```sql
-SELECT dbo.EncryptText('SensitiveData')
+
+SELECT dbo.EncryptText('SensitiveData') ;
+
 ```sql
-    
