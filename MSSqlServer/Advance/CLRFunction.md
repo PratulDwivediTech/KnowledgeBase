@@ -29,13 +29,12 @@
       ```
 # Advance Functions:
 ## 1. Function: EncryptText
-This function encrypts a given string using key and return encrypted string
-   
+This function encrypts a given string using key and return encrypted string   
 ### Use Case:
-    - Scenario: Securely storing sensitive information such as passwords in the database.
-    - Purpose: Encrypt a plain text string using encryption before storing it.
+- Scenario: Securely storing sensitive information such as passwords in the database.
+- Purpose: Encrypt a plain text string using encryption before storing it.
 ### Usage: 
-    ```sql
-        SELECT dbo.EncryptText('SensitiveData')
-    ```sql
+```sql
+    SELECT dbo.EncryptText('SensitiveData')
+```sql
     
