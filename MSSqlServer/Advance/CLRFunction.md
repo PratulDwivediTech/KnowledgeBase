@@ -202,41 +202,7 @@ SELECT dbo.PostHttpFormData('https://www.example.com/form', 'Authorization: Bear
 
 ---
 
-## 9. SendMail Function
-
-### **Description:**
-The `SendMail` function sends an email using the specified SMTP server.
-
-### **Use Case:**
-This function is used to send emails from a SQL Server environment, such as sending notifications or reports.
-
-### **Input Parameters:**
-- **EMailHost (string):** The SMTP server to use for sending the email.
-- **FromName (string):** The display name of the sender.
-- **FromEmailId (string):** The email address of the sender.
-- **LoginPassword (string):** The password for the sender's email account.
-- **Port (int):** The port number to use for the SMTP server.
-- **IsSSL (bool):** Whether to use SSL for the SMTP connection.
-- **EmailTo (string):** The recipient's email address.
-- **EmailCC (string):** The CC recipient's email address.
-- **EmailBCC (string):** The BCC recipient's email address.
-- **ReplyTo (string):** The Reply-To email address.
-- **EmailSubject (string):** The subject of the email.
-- **EmailBody (string):** The body of the email.
-- **AttachmentBytes (string):** The attachment data in hexadecimal format.
-- **LogId (int):** The log ID for tracking email status.
-
-### **Output:**
-- **Status (SqlString):** The status of the email send operation.
-
-### **Example:**
-```sql
-SELECT dbo.SendMail('smtp.example.com', 'Sender Name', 'sender@example.com', 'password', 587, 1, 'recipient@example.com', '', '', '', 'Subject', 'Body', '', 1)
-```
-
----
-
-## 10. UspSendMail Procedure
+## 9. UspSendMail Procedure
 
 ### **Description:**
 The `UspSendMail` procedure sends an email using the specified SMTP server, similar to the `SendMail` function, but as a stored procedure.
