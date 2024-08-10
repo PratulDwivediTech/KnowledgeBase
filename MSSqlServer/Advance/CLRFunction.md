@@ -14,17 +14,17 @@
   - Step 4: Register the assembly in SQL Server using the CREATE ASSEMBLY statement.
   - Step 5: Create the CLR function using the CREATE FUNCTION statement and reference the method from the registered assembly.
 - ### Example
-- #### Simple Function
-  ```csharp
-    using System;
-    using Microsoft.SqlServer.Server;
-    
-    public class SqlClrFunctions
-    {
-        [SqlFunction]
-        public static int AddNumbers(int a, int b)
+    - #### Simple Function
+      ```csharp
+        using System;
+        using Microsoft.SqlServer.Server;
+        
+        public class SqlClrFunctions
         {
-            return a + b;
+            [SqlFunction]
+            public static int AddNumbers(int a, int b)
+            {
+                return a + b;
+            }
         }
-    }
-  ```
+      ```
