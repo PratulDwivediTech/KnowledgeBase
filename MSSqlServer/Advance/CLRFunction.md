@@ -14,6 +14,7 @@
   - Step 4: Register the assembly in SQL Server using the CREATE ASSEMBLY statement.
   - Step 5: Create the CLR function using the CREATE FUNCTION statement and reference the method from the registered assembly.
 - ### Example
+- #### Simple Function
   ```csharp
     using System;
     using Microsoft.SqlServer.Server;
