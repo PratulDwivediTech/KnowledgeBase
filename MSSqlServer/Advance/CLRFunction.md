@@ -1,6 +1,5 @@
 # CLR Functions
 - A CLR (Common Language Runtime) function in Microsoft SQL Server is a type of user-defined function that is written using a .NET language like C# or VB.NET, rather than T-SQL (Transact-SQL). SQL Server integrates with the .NET Framework, allowing you to run managed code directly within the SQL Server environment.
-
 ## Key Points about MS SQL CLR Functions:
 - ### Purpose:
     CLR functions are typically used for complex calculations, operations that are not easily implemented in T-SQL, or when you need to leverage the full capabilities of the .NET Framework within SQL Server.
@@ -28,3 +27,12 @@
             }
         }
       ```
+# Functions:
+## 1. Function: EncryptText
+    - This function encrypts a given string using key
+   
+### Use Case:
+    - Scenario: Securely storing sensitive information such as passwords in the database.
+    - Purpose: Encrypt a plain text string using encryption before storing it.
+    - #### Example: SELECT dbo.EncryptText('SensitiveData')
+    
