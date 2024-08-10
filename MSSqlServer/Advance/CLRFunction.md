@@ -28,6 +28,7 @@
         }
       ```
 # Advance Functions:
+
 ## 1. Function: EncryptText
 This function encrypts a given string using key and return encrypted string   
 ### Use Case:
@@ -35,7 +36,337 @@ This function encrypts a given string using key and return encrypted string
 - Purpose: Encrypt a plain text string using encryption before storing it.
 ### Usage: 
 ```sql
-
 SELECT dbo.EncryptText('SensitiveData') ;
+```
 
+## 2. Function: DecryptText
+This function decrypts encrypted string back to its original plain text.  
+### Use Case:
+- Scenario: Retrieving sensitive information that was previously encrypted.
+- Purpose: Decrypt an encrypted string to its original plain text.
+### Usage: 
 ```sql
+SELECT dbo.DecryptText('EncryptedData') ;
+```
+
+## 3. Function: GetPlainText
+This function removes HTML tags and special characters from a given string.
+### Use Case:
+- Scenario: Extracting clean text content from an HTML string or removing unwanted HTML tags.
+- Purpose: Remove HTML tags and special characters from a string, leaving only the plain text.
+### Usage: 
+```sql
+SELECT dbo.GetPlainText('<p>Hello</p> &nbsp; World!');
+```
+
+## 4. Function: StringToBase64
+This function converts a string into Base64 encoded format.
+### Use Case:
+- Scenario: Converting text data into Base64 format for encoding binary data in the database.
+- Purpose: Convert a plain text string to its Base64 encoded version.
+### Usage: 
+```sql
+SELECT dbo.StringToBase64('EncodeThis');
+```
+## 5. Function: GetHttpData
+This function fetches data from a specified URL using an HTTP GET request.
+### Use Case:
+- Scenario: Fetching data from a remote HTTP API within a SQL Server environment.
+- Purpose: Retrieve data from a given URL using HTTP GET.
+### Usage: 
+```sql
+SELECT dbo.GetHttpData('https://api.example.com/data') ;
+```
+
+## 6. Function: GetHttpDataHeaders
+This function fetches data from a specified URL using an HTTP GET request with custom headers.
+### Use Case:
+- Scenario: Fetching data from an API that requires custom headers.
+- Purpose: Retrieve data from a URL using HTTP GET with custom headers.
+### Usage: 
+```sql
+SELECT dbo.GetHttpDataHeaders('https://api.example.com/data', 'Authorization: Bearer token');
+```
+
+## 7. Function: PostHttpData
+This function sends data to a specified URL using an HTTP POST request with custom headers.
+### Use Case:
+- Scenario: Sending data to a remote server using HTTP POST from SQL Server.
+- Purpose: Post data to a URL using HTTP POST with custom headers.
+### Usage: 
+```sql
+SELECT dbo.PostHttpData('https://api.example.com/submit', 'Authorization: Bearer token', '{"key": "value"}');
+```
+
+
+## 8. Function: PostHttpFormData
+This function sends form data to a specified URL using an HTTP POST request with custom headers.
+### Use Case:
+- Scenario: Submitting form data to a remote server via HTTP POST.
+- Purpose: Post form data to a URL using HTTP POST with custom headers.
+### Usage: 
+```sql
+SELECT dbo.PostHttpFormData('https://api.example.com/form', 'Authorization: Bearer token', 'field1=value1&field2=value2')
+```
+
+## 9. Function: SendMail
+This procedure sends an email with specified details, including attachments, from SQL Server.
+### Use Case:
+- Scenario: Sending an email notification from SQL Server after certain events or triggers.
+- Purpose: Send an email with specified details, including attachments, from SQL Server.
+### Usage: 
+```sql
+
+EXEC dbo.UspSendMail 'smtp.example.com', 'Sender Name', 'sender@example.com', 'password', 587, 1, 'recipient@example.com', '', '', '', 'Subject', 'Body', '', 'attachment.pdf', 123, @ReturnValue OUTPUT
+
+```
+
+
+
+# Use Case and Help Document
+
+## 1. EncryptText Function
+
+### **Description:**
+The `EncryptText` function encrypts a given string using the Rijndael encryption algorithm.
+
+### **Use Case:**
+This function is used when you need to securely encrypt sensitive data before storing it in a database or transmitting it over a network.
+
+### **Input Parameters:**
+- **value (string):** The text that needs to be encrypted.
+
+### **Output:**
+- **Encrypted text (SqlString):** The encrypted version of the input text.
+
+### **Example:**
+```sql
+SELECT dbo.EncryptText('MySecretPassword')
+```
+
+---
+
+## 2. DecryptText Function
+
+### **Description:**
+The `DecryptText` function decrypts a previously encrypted string using the Rijndael decryption algorithm.
+
+### **Use Case:**
+This function is used when you need to retrieve the original text from an encrypted string stored in a database.
+
+### **Input Parameters:**
+- **value (string):** The encrypted text that needs to be decrypted.
+
+### **Output:**
+- **Decrypted text (SqlString):** The original text after decryption.
+
+### **Example:**
+```sql
+SELECT dbo.DecryptText('EncryptedText')
+```
+
+---
+
+## 3. GetPlainText Function
+
+### **Description:**
+The `GetPlainText` function removes HTML tags and special characters from a given string.
+
+### **Use Case:**
+This function is useful when you need to sanitize text input by removing HTML tags and special characters.
+
+### **Input Parameters:**
+- **value (string):** The text from which HTML tags and special characters need to be removed.
+
+### **Output:**
+- **Plain text (SqlString):** The cleaned text with HTML tags and special characters removed.
+
+### **Example:**
+```sql
+SELECT dbo.GetPlainText('<p>Hello World!</p>&nbsp;')
+```
+
+---
+
+## 4. StringToBase64 Function
+
+### **Description:**
+The `StringToBase64` function converts a given string to its Base64 encoded representation.
+
+### **Use Case:**
+This function is used to encode binary data into a Base64 string for storage or transmission.
+
+### **Input Parameters:**
+- **value (string):** The text that needs to be converted to Base64.
+
+### **Output:**
+- **Base64 encoded text (SqlString):** The Base64 encoded version of the input text.
+
+### **Example:**
+```sql
+SELECT dbo.StringToBase64('Hello World!')
+```
+
+---
+
+## 5. GetHttpData Function
+
+### **Description:**
+The `GetHttpData` function retrieves the HTML content from a specified URL.
+
+### **Use Case:**
+This function is used to fetch the content of a web page for processing or storage.
+
+### **Input Parameters:**
+- **url (string):** The URL of the web page to retrieve.
+
+### **Output:**
+- **HTML content (SqlString):** The content of the web page as a string.
+
+### **Example:**
+```sql
+SELECT dbo.GetHttpData('https://www.example.com')
+```
+
+---
+
+## 6. GetHttpDataHeaders Function
+
+### **Description:**
+The `GetHttpDataHeaders` function retrieves the HTML content from a specified URL with custom headers.
+
+### **Use Case:**
+This function is used to fetch web page content while passing specific headers, such as authorization tokens or custom user-agents.
+
+### **Input Parameters:**
+- **url (string):** The URL of the web page to retrieve.
+- **header (string):** The custom headers to include in the request.
+
+### **Output:**
+- **HTML content (SqlString):** The content of the web page as a string.
+
+### **Example:**
+```sql
+SELECT dbo.GetHttpDataHeaders('https://www.example.com', 'Authorization: Bearer token;User-Agent: MyAgent')
+```
+
+---
+
+## 7. PostHttpData Function
+
+### **Description:**
+The `PostHttpData` function sends a POST request to a specified URL with JSON data and custom headers.
+
+### **Use Case:**
+This function is used to send data to a web server via a POST request, such as submitting form data or triggering an API.
+
+### **Input Parameters:**
+- **url (string):** The URL of the web server to send the data to.
+- **header (string):** The custom headers to include in the request.
+- **data (string):** The JSON data to send in the POST request.
+
+### **Output:**
+- **Response (SqlString):** The response from the server.
+
+### **Example:**
+```sql
+SELECT dbo.PostHttpData('https://www.example.com/api', 'Authorization: Bearer token', '{"key":"value"}')
+```
+
+---
+
+## 8. PostHttpFormData Function
+
+### **Description:**
+The `PostHttpFormData` function sends a POST request to a specified URL with form data and custom headers.
+
+### **Use Case:**
+This function is used to submit form data to a web server via a POST request.
+
+### **Input Parameters:**
+- **url (string):** The URL of the web server to send the data to.
+- **header (string):** The custom headers to include in the request.
+- **data (string):** The form data to send in the POST request.
+
+### **Output:**
+- **Response (SqlString):** The response from the server.
+
+### **Example:**
+```sql
+SELECT dbo.PostHttpFormData('https://www.example.com/form', 'Authorization: Bearer token', 'field1=value1&field2=value2')
+```
+
+---
+
+## 9. SendMail Function
+
+### **Description:**
+The `SendMail` function sends an email using the specified SMTP server.
+
+### **Use Case:**
+This function is used to send emails from a SQL Server environment, such as sending notifications or reports.
+
+### **Input Parameters:**
+- **EMailHost (string):** The SMTP server to use for sending the email.
+- **FromName (string):** The display name of the sender.
+- **FromEmailId (string):** The email address of the sender.
+- **LoginPassword (string):** The password for the sender's email account.
+- **Port (int):** The port number to use for the SMTP server.
+- **IsSSL (bool):** Whether to use SSL for the SMTP connection.
+- **EmailTo (string):** The recipient's email address.
+- **EmailCC (string):** The CC recipient's email address.
+- **EmailBCC (string):** The BCC recipient's email address.
+- **ReplyTo (string):** The Reply-To email address.
+- **EmailSubject (string):** The subject of the email.
+- **EmailBody (string):** The body of the email.
+- **AttachmentBytes (string):** The attachment data in hexadecimal format.
+- **LogId (int):** The log ID for tracking email status.
+
+### **Output:**
+- **Status (SqlString):** The status of the email send operation.
+
+### **Example:**
+```sql
+SELECT dbo.SendMail('smtp.example.com', 'Sender Name', 'sender@example.com', 'password', 587, 1, 'recipient@example.com', '', '', '', 'Subject', 'Body', '', 1)
+```
+
+---
+
+## 10. UspSendMail Procedure
+
+### **Description:**
+The `UspSendMail` procedure sends an email using the specified SMTP server, similar to the `SendMail` function, but as a stored procedure.
+
+### **Use Case:**
+This procedure is used to send emails with the option to return an output parameter indicating the status of the operation.
+
+### **Input Parameters:**
+- **EMailHost (string):** The SMTP server to use for sending the email.
+- **FromName (string):** The display name of the sender.
+- **FromEmailId (string):** The email address of the sender.
+- **Password (string):** The password for the sender's email account.
+- **Port (int):** The port number to use for the SMTP server.
+- **IsSSL (bool):** Whether to use SSL for the SMTP connection.
+- **EmailTo (string):** The recipient's email address.
+- **EmailCC (string):** The CC recipient's email address.
+- **EmailBCC (string):** The BCC recipient's email address.
+- **ReplyTo (string):** The Reply-To email address.
+- **EmailSubject (string):** The subject of the email.
+- **EmailBody (string):** The body of the email.
+- **AttachmentBytes (string):** The attachment data in hexadecimal format.
+- **FileName (string):** The name of the attachment file.
+- **LogId (int):** The log ID for tracking email status.
+- **ReturnValue (out string):** The output parameter indicating the status of the email send operation.
+
+### **Output:**
+- **ReturnValue (string):** The status of the email send operation.
+
+### **Example:**
+```sql
+DECLARE @ReturnValue NVARCHAR(MAX);
+EXEC dbo.UspSendMail 'smtp.example.com', 'Sender Name', 'sender@example.com', 'password', 587, 1, 'recipient@example.com', '', '', '', 'Subject', 'Body', '', 'attachment.pdf', 1, @ReturnValue OUT;
+PRINT @ReturnValue;
+```
+
+
+
